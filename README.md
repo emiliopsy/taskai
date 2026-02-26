@@ -1,6 +1,6 @@
 # TaskAI — Organizador Inteligente de Tareas
 
-> PWA móvil + web con IA integrada. Escribís en texto libre, Claude organiza todo.
+> PWA móvil + web con IA integrada. Escribís en texto libre y la IA organiza todo automáticamente.
 
 ## 🚀 Setup en 4 pasos (≈15 minutos)
 
@@ -13,23 +13,20 @@
    - `Project URL` → será tu `NEXT_PUBLIC_SUPABASE_URL`
    - `anon / public key` → será tu `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
-### Paso 2 — Claude API
+### Paso 2 — Google Gemini API (gratis)
 
-1. Ir a [console.anthropic.com](https://console.anthropic.com) → **API Keys**
-2. Crear nueva clave → copiar como `ANTHROPIC_API_KEY`
+1. Ir a [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+2. Crear nueva API key → copiar como `GOOGLE_API_KEY`
+3. El tier gratuito incluye 1500 requests/día con `gemini-1.5-flash`
 
 ### Paso 3 — Variables de entorno
 
-Copiá `.env.local.example` como `.env.local` y completá los valores:
-
-```bash
-cp .env.local.example .env.local
-```
+Crear un archivo `.env.local` en la raíz del proyecto con estos valores:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...
-ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_API_KEY=AIzaSy...
 ```
 
 ### Paso 4 — Correr localmente
@@ -74,7 +71,7 @@ taskai/
 │   ├── globals.css         # Estilos globales
 │   └── api/
 │       └── parse-tasks/
-│           └── route.ts    # Endpoint que llama a Claude API
+│           └── route.ts    # Endpoint que llama a Gemini API
 ├── components/
 │   ├── TaskCard.tsx        # Card individual de tarea
 │   ├── TaskInput.tsx       # Input de texto libre con IA
@@ -83,8 +80,7 @@ taskai/
 │   └── supabase.ts         # Cliente Supabase + tipos TypeScript
 ├── public/
 │   └── manifest.json       # Manifest PWA
-├── supabase-schema.sql     # Schema SQL para ejecutar en Supabase
-└── .env.local.example      # Template de variables de entorno
+└── supabase-schema.sql     # Schema SQL para ejecutar en Supabase
 ```
 
 ---
@@ -94,8 +90,8 @@ taskai/
 1. Tocá **+ Nueva** en la esquina superior derecha
 2. Escribí tus tareas en texto libre, por ejemplo:
    - *"llamar a Juan mañana, entregar el informe esta semana con alta prioridad, comprar leche"*
-3. Tocá **Organizar** (o ⌘↵)
-4. Claude las analiza y las agrega organizadas con categoría, prioridad y fecha
+3. Tocá **Organizar**
+4. La IA las analiza y las agrega organizadas con categoría, prioridad y fecha
 
 ---
 
@@ -114,6 +110,6 @@ taskai/
 |----------|------|-------|
 | Vercel | Hobby | Gratis |
 | Supabase | Free | Gratis |
-| Claude API | Pay-per-use | ~$2–5/mes uso personal |
+| Google Gemini | Free tier | Gratis (1500 req/día) |
 
-**Total: ~$2–5/mes** según el uso de la IA.
+**Total: $0/mes** para uso personal normal.
